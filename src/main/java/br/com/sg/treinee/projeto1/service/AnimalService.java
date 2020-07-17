@@ -29,4 +29,15 @@ public class AnimalService {
         return animal;
     }
 
+    @Transactional
+    public Animal updateOne(Animal animal) {
+        this.repository.saveAndFlush(animal);
+        return animal;
+    }
+
+    @Transactional
+    public void removeOne(Long id) {
+        this.repository.deleteById(id);
+    }
+
 }

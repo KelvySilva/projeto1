@@ -12,8 +12,13 @@ import java.util.Optional;
 @RequestMapping(path = "cliente")
 public class ClienteAPI {
 
+
+    private final ClienteService service;
+
     @Autowired
-    private ClienteService service;
+    public ClienteAPI(ClienteService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity listAll() {
@@ -22,9 +27,7 @@ public class ClienteAPI {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity listOne(@PathVariable Long id) {
-
         return ResponseEntity.ok(this.service.findOne(id));
-
     }
 
     @PostMapping
@@ -40,4 +43,9 @@ public class ClienteAPI {
         return ResponseEntity.ok(cliente);
     }
 
+    @DeleteMapping
+    public ResponseEntity removeOne(@PathVariable Long id) {
+        this.service.remove(id);
+        return ResponseEntity.ok("Removed Successfully");
+    }
 }

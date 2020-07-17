@@ -41,6 +41,11 @@ public class ClienteService {
         return cliente;
     }
 
+    @Transactional
+    public void remove(Long id) {
+        this.repository.deleteById(id);
+    }
+
 
 
 }

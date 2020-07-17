@@ -12,8 +12,13 @@ import java.util.Optional;
 @RequestMapping(path = "animal")
 public class AnimalAPI {
 
+
+    private final AnimalService service;
+
     @Autowired
-    private AnimalService service;
+    public AnimalAPI(AnimalService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity listAll() {
@@ -21,7 +26,7 @@ public class AnimalAPI {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity getByID(@PathVariable Long id) {
+    public ResponseEntity listOne(@PathVariable Long id) {
         Optional<Animal> optionalAnimal = this.service.findOne(id);
         if (optionalAnimal.isPresent()) {
             return ResponseEntity.ok(optionalAnimal.get());
@@ -31,17 +36,19 @@ public class AnimalAPI {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody Animal animal) {
+    public ResponseEntity saveOne(@RequestBody Animal animal) {
         return ResponseEntity.ok(this.service.saveOne(animal));
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody Animal animal) {
-        return ResponseEntity.ok(animal);
+    public ResponseEntity updateOne(@PathVariable Long id,@RequestBody Animal animal) {
+        animal.setId(id);
+        return ResponseEntity.ok(this.service.updateOne(animal));
     }
 
     @DeleteMapping
-    public ResponseEntity remove(@RequestBody Long id) {
-        return ResponseEntity.ok(id);
+    public ResponseEntity removeOne(@RequestBody Long id) {
+        this.service.removeOne(id);
+        return ResponseEntity.ok("Removed Successfully");
     }
 }
