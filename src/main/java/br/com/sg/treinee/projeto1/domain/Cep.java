@@ -1,4 +1,4 @@
-package br.com.sg.treinee.projeto1.models;
+package br.com.sg.treinee.projeto1.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

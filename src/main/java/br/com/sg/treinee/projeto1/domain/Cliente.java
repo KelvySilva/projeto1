@@ -1,7 +1,8 @@
-package br.com.sg.treinee.projeto1.models;
+package br.com.sg.treinee.projeto1.domain;
 
 import lombok.*;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -9,19 +10,12 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente {
+@Entity
+public class Cliente extends AbtractEntity {
 
     @NotNull
     @NotEmpty
     private String nome;
-
-    @NotNull
-    @NotEmpty
-    private Long Cpf;
-
-    @NotNull
-    @NotEmpty
-    private String endereco;
 
     @NotNull
     @NotEmpty

@@ -1,8 +1,7 @@
-package br.com.sg.treinee.projeto1.models;
+package br.com.sg.treinee.projeto1.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
@@ -13,7 +12,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Pedido {
 
@@ -21,15 +19,20 @@ public class Pedido {
     @NotEmpty
     private Long numeroPedido;
 
-    @NotNull
-    @NotEmpty
     private Date dataPedido;
 
     private List<Item> items;
 
+    @NotNull
+    @NotEmpty
     private BigDecimal valorTotal;
 
     @NotNull
     @NotEmpty
     private Cliente cliente;
+
+    public Pedido() {
+        this.valorTotal = BigDecimal.ZERO;
+        this.dataPedido = new Date();
+    }
 }
